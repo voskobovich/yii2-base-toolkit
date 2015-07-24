@@ -1,0 +1,38 @@
+{
+  "name": "voskobovich/yii2-backend-backbone",
+  "description": "The foundation for implementing CRUD operations administrative panel for Yii2",
+  "keywords": [
+    "admin",
+    "crud",
+    "yii2",
+    "panel",
+    "email"
+  ],
+  "homepage": "https://github.com/voskobovich/yii2-backend-backbone",
+  "type": "yii2-widget",
+  "license": "MIT",
+  "support": {
+    "issues": "https://github.com/voskobovich/yii2-backend-backbone/issues",
+    "source": "https://github.com/voskobovich/yii2-backend-backbone"
+  },
+  "authors": [
+    {
+      "name": "Vitaly Voskobovich",
+      "email": "vitaly@voskobovich.com",
+      "homepage": "http://voskobovich.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "yiisoft/yii2": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "voskobovich\\baseToolkit\\": "",
+      "voskobovich\\baseToolkit\\db": "db",
+      "voskobovich\\baseToolkit\\db\\mysql": "db/mysql",
+      "voskobovich\\baseToolkit\\db\\pgsql": "db/pgsql",
+      "voskobovich\\baseToolkit\\helpers": "helpers"
+    }
+  }
+}
