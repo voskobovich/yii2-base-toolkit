@@ -13,7 +13,7 @@ use yii\base\Object;
 class AlertHelper extends Object
 {
     /**
-     * Сеттер флеш сообения - Успех
+     * Add success message
      * @param $body
      */
     public static function success($body)
