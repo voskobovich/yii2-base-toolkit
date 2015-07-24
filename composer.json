@@ -27,7 +27,7 @@
   },
   "autoload": {
     "psr-4": {
-      "voskobovich\\baseToolkit\\": "",
+      "voskobovich\\baseToolkit": "",
       "voskobovich\\baseToolkit\\db": "db",
       "voskobovich\\baseToolkit\\db\\mysql": "db/mysql",
       "voskobovich\\baseToolkit\\db\\pgsql": "db/pgsql",
