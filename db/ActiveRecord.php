@@ -3,6 +3,7 @@
 namespace voskobovich\baseToolkit\db;
 
 use Yii;
+use yii\base\ErrorException;
 use yii\data\ActiveDataProvider;
 
 
@@ -15,14 +16,14 @@ use yii\data\ActiveDataProvider;
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
     /**
-     * Список сценариев
+     * Scenarios
      */
     const SCENARIO_INSERT = 'insert';
     const SCENARIO_UPDATE = 'update';
     const SCENARIO_DELETE = 'delete';
 
     /**
-     * Поиск моделей
+     * Find model
      * @param $params
      * @return ActiveDataProvider
      */
@@ -34,7 +35,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
             'query' => $query,
         ]);
 
-        // Загружаем данные с формы в модель
         if (!$this->load($params)) {
             return $dataProvider;
         }
@@ -43,11 +43,10 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
     /**
-     * Данные для элемента формы DropDownList
-     * Возвращает массив записей или пустой массив
+     * Array for DropDownList
      *
-     * @param string $keyField - атрибут индексации
-     * @param string $valueField - атрибут отображаемого имени
+     * @param string $keyField
+     * @param string $valueField
      * @return array
      */
     public static function listAll($keyField = 'id', $valueField = 'name')
@@ -66,7 +65,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
     /**
-     * Проверка измененности атрибута после сохранения модели
+     * Checking the alteration of the attribute after saving the model
      * @param $attributeName
      * @param $changedAttributes
      * @return bool
@@ -87,7 +86,24 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
     /**
-     * Поиск модели по Primary Key
+     * Main primary key of model for sorting, selecting and more
+     * @return string
+     * @throws ErrorException
+     */
+    public function getMainPk()
+    {
+        $pkName = $this->primaryKey();
+        if (is_array($pkName)) {
+            if (count($pkName) > 1) {
+                throw new ErrorException('Composite foreign keys are not allowed.');
+            }
+            $pkName = $pkName[0];
+        }
+        return (string)$pkName;
+    }
+
+    /**
+     * Find by
      * @param $id
      * @param null $where
      * @return mixed
@@ -105,7 +121,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
     /**
-     * Дата создания
+     * Formatted date create record
      * @param string $format
      * @param bool $plural
      * @return string
@@ -130,7 +146,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
     /**
-     * Дата обновления
+     * Formatted date update record
      * @param string $format
      * @param bool $plural
      * @return string
