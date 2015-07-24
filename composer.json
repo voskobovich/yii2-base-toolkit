@@ -1,19 +1,18 @@
 {
-  "name": "voskobovich/yii2-backend-backbone",
-  "description": "The foundation for implementing CRUD operations administrative panel for Yii2",
+  "name": "voskobovich/yii2-base-toolkit",
+  "description": "Tools for Yii2",
   "keywords": [
-    "admin",
-    "crud",
+    "base",
+    "toolkit",
     "yii2",
-    "panel",
-    "email"
+    "helpers"
   ],
-  "homepage": "https://github.com/voskobovich/yii2-backend-backbone",
+  "homepage": "https://github.com/voskobovich/yii2-base-toolkit",
   "type": "yii2-widget",
   "license": "MIT",
   "support": {
-    "issues": "https://github.com/voskobovich/yii2-backend-backbone/issues",
-    "source": "https://github.com/voskobovich/yii2-backend-backbone"
+    "issues": "https://github.com/voskobovich/yii2-base-toolkit/issues",
+    "source": "https://github.com/voskobovich/yii2-base-toolkit"
   },
   "authors": [
     {
