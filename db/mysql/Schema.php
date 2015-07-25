@@ -1,11 +1,11 @@
 <?php
 
-namespace voskobovich\baseToolkit\db\mysql;
+namespace voskobovich\base\db\mysql;
 
 
 /**
  * Class Schema
- * @package voskobovich\baseToolkit\db\mysql
+ * @package voskobovich\base\db\mysql
  */
 class Schema extends \yii\db\mysql\Schema
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace voskobovich\baseToolkit\db\pgsql;
+namespace voskobovich\base\db\pgsql;
 
 
 /**
  * Class Schema
- * @package voskobovich\baseToolkit\db\pgsql
+ * @package voskobovich\base\db\pgsql
  */
 class Schema extends \yii\db\mysql\Schema
 {

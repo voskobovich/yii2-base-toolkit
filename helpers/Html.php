@@ -1,11 +1,11 @@
 <?php
 
-namespace voskobovich\baseToolkit\helpers;
+namespace voskobovich\base\helpers;
 
 
 /**
  * Class Html
- * @package voskobovich\baseToolkit\helpers
+ * @package voskobovich\base\helpers
  */
 class Html extends \yii\helpers\Html
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace voskobovich\baseToolkit\helpers;
+namespace voskobovich\base\helpers;
 
 use Yii;
 use yii\base\Object;
@@ -12,7 +12,7 @@ use yii\web\BadRequestHttpException;
 
 /**
  * Class HttpError
- * @package voskobovich\baseToolkit\helpers
+ * @package voskobovich\base\helpers
  */
 class HttpError extends Object
 {

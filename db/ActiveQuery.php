@@ -1,11 +1,11 @@
 <?php
 
-namespace voskobovich\baseToolkit\db;
+namespace voskobovich\base\db;
 
 
 /**
  * Class ActiveQuery
- * @package voskobovich\baseToolkit\db
+ * @package voskobovich\base\db
  */
 class ActiveQuery extends \yii\db\ActiveQuery
 {

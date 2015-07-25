@@ -1,11 +1,11 @@
 <?php
 
-namespace voskobovich\baseToolkit\helpers;
+namespace voskobovich\base\helpers;
 
 
 /**
  * Class FileHelper
- * @package voskobovich\baseToolkit\helpers
+ * @package voskobovich\base\helpers
  */
 class FileHelper extends \yii\helpers\FileHelper
 {

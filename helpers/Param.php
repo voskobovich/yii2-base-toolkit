@@ -1,6 +1,6 @@
 <?php
 
-namespace voskobovich\baseToolkit\helpers;
+namespace voskobovich\base\helpers;
 
 use Yii;
 use yii\base\Object;
@@ -8,7 +8,7 @@ use yii\base\Object;
 
 /**
  * Class Param
- * @package voskobovich\baseToolkit\helpers
+ * @package voskobovich\base\helpers
  */
 class Param extends Object
 {

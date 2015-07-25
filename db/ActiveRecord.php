@@ -1,6 +1,6 @@
 <?php
 
-namespace voskobovich\baseToolkit\db;
+namespace voskobovich\base\db;
 
 use Yii;
 use yii\base\ErrorException;
@@ -9,7 +9,7 @@ use yii\data\ActiveDataProvider;
 
 /**
  * Class ActiveRecord
- * @package voskobovich\baseToolkit\db
+ * @package voskobovich\base\db
  *
  * @property integer id
  */
