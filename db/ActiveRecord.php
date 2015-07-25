@@ -169,13 +169,4 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
         return $date->format($format);
     }
-
-    /**
-     * Object name for print in Error Message
-     * @return mixed
-     */
-    public function getNameForError()
-    {
-        return $this->id;
-    }
 }
