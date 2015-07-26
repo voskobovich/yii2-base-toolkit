@@ -31,4 +31,16 @@ class ActiveQuery extends \yii\db\ActiveQuery
         $this->andWhere(['t.status_key' => $status]);
         return $this;
     }
+
+    /**
+     * Scope for model type
+     * @param int $type
+     * @return $this
+     */
+    public function type($type)
+    {
+        $this->andWhere(['t.type_key' => $type]);
+
+        return $this;
+    }
 }
