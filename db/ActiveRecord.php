@@ -23,6 +23,15 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     const SCENARIO_DELETE = 'delete';
 
     /**
+     * @inheritdoc
+     * @return ActiveQuery
+     */
+    public static function find()
+    {
+        return new ActiveQuery(get_called_class());
+    }
+
+    /**
      * Find model
      * @param $params
      * @return ActiveDataProvider
@@ -65,27 +74,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
     /**
-     * Checking the alteration of the attribute after saving the model
-     * @param $attributeName
-     * @param $changedAttributes
-     * @return bool
-     */
-    public function isAttributeModified($attributeName, $changedAttributes)
-    {
-        return isset($changedAttributes[$attributeName]) &&
-        $changedAttributes[$attributeName] != $this->oldAttributes[$attributeName];
-    }
-
-    /**
-     * @inheritdoc
-     * @return ActiveQuery
-     */
-    public static function find()
-    {
-        return new ActiveQuery(get_called_class());
-    }
-
-    /**
      * Main primary key of model for sorting, selecting and more
      * @return string
      * @throws ErrorException
@@ -103,70 +91,34 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
     /**
-     * Find by
-     * @param $id
-     * @param null $where
-     * @return mixed
-     */
-    public static function findByPk($id, $where = null)
-    {
-        /** @var ActiveRecord $model */
-        $query = static::find()->andWhere('id = :id', [':id' => $id]);
-
-        if (is_array($where)) {
-            $query->where($where);
-        }
-
-        return $query->one();
-    }
-
-    /**
      * Formatted date create record
      * @param string $format
-     * @param bool $plural
+     * @param string $emptyLabel
      * @return string
+     * @throws \yii\base\InvalidConfigException
      */
-    public function getCreated($format = 'd M Y H:i', $plural = true)
+    public function getCreated($format = 'long', $emptyLabel = '-')
     {
-        $dateFormatter = Yii::$app->get('dateFormatter', false);
-
         if (empty($this->created_at)) {
-            if ($dateFormatter) {
-                return $dateFormatter->emptyLabel;
-            }
-            return '-';
+            return $emptyLabel;
         }
 
-        $date = new \DateTime($this->created_at);
-
-        if ($dateFormatter) {
-            return $dateFormatter->format($date, $format, $plural);
-        }
-        return $date->format($format);
+        return Yii::$app->formatter->asDate($this->created_at, $format);
     }
 
     /**
      * Formatted date update record
      * @param string $format
-     * @param bool $plural
+     * @param string $emptyLabel
      * @return string
+     * @throws \yii\base\InvalidConfigException
      */
-    public function getUpdated($format = 'd M Y H:i', $plural = true)
+    public function getUpdated($format = 'long', $emptyLabel = '-')
     {
-        $dateFormatter = Yii::$app->get('dateFormatter', false);
-
         if (empty($this->updated_at)) {
-            if ($dateFormatter) {
-                return $dateFormatter->emptyLabel;
-            }
-            return '-';
+            return $emptyLabel;
         }
 
-        $date = new \DateTime($this->updated_at);
-
-        if ($dateFormatter) {
-            return $dateFormatter->format($date, $format, $plural);
-        }
-        return $date->format($format);
+        return Yii::$app->formatter->asDate($this->updated_at, $format);
     }
 }
