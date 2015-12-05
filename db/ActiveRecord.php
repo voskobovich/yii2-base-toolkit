@@ -32,26 +32,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
     }
 
     /**
-     * Find model
-     * @param $params
-     * @return ActiveDataProvider
-     */
-    public function search($params)
-    {
-        $query = self::find();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        if (!$this->load($params)) {
-            return $dataProvider;
-        }
-
-        return $dataProvider;
-    }
-
-    /**
      * Array for DropDownList
      *
      * @param string $keyField
