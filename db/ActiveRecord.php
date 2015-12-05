@@ -4,7 +4,6 @@ namespace voskobovich\base\db;
 
 use Yii;
 use yii\base\ErrorException;
-use yii\data\ActiveDataProvider;
 
 
 /**
