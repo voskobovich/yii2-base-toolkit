@@ -100,4 +100,13 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
 
         return Yii::$app->formatter->asDate($this->updated_at, $format);
     }
+
+    /**
+     * Returns the form lowercase name that this model class should use.
+     * @return string
+     */
+    public function formId()
+    {
+        return mb_strtolower($this->formName()) . '-form';
+    }
 }
