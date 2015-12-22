@@ -4,6 +4,7 @@ namespace voskobovich\base\db;
 
 use Yii;
 use yii\base\ErrorException;
+use yii\helpers\ArrayHelper;
 
 
 /**
@@ -35,21 +36,17 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
      *
      * @param string $keyField
      * @param string $valueField
+     * @param bool $asArray
      * @return array
      */
-    public static function listAll($keyField = 'id', $valueField = 'name')
+    public static function listAll($keyField = 'id', $valueField = 'name', $asArray = true)
     {
-        $models = static::find()
-            ->all();
-
-        $items = [];
-
-        foreach ($models as $model) {
-            $key = $model->{$keyField};
-            $items[$key] = $model->{$valueField};
+        $query = static::find();
+        if ($asArray) {
+            $query->select([$keyField, $valueField])->asArray();
         }
 
-        return $items;
+        return ArrayHelper::map($query->all(), $keyField, $valueField);
     }
 
     /**
