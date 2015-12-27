@@ -32,7 +32,8 @@
       "voskobovich\\base\\db\\": "db",
       "voskobovich\\base\\db\\mysql\\": "db/mysql",
       "voskobovich\\base\\db\\pgsql\\": "db/pgsql",
-      "voskobovich\\base\\helpers\\": "helpers"
+      "voskobovich\\base\\helpers\\": "helpers",
+      "voskobovich\\base\\traits\\": "traits"
     }
   }
 }

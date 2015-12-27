@@ -2,6 +2,7 @@
 
 namespace voskobovich\base\db;
 
+use voskobovich\base\traits\ModelTrait;
 use Yii;
 use yii\base\ErrorException;
 use yii\helpers\ArrayHelper;
@@ -15,6 +16,8 @@ use yii\helpers\ArrayHelper;
  */
 abstract class ActiveRecord extends \yii\db\ActiveRecord
 {
+    use ModelTrait;
+
     /**
      * Scenarios
      */
@@ -96,14 +99,5 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         }
 
         return Yii::$app->formatter->asDate($this->updated_at, $format);
-    }
-
-    /**
-     * Returns the form lowercase name that this model class should use.
-     * @return string
-     */
-    public function formId()
-    {
-        return mb_strtolower($this->formName()) . '-form';
     }
 }
