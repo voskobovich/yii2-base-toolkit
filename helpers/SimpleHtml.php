@@ -2,12 +2,14 @@
 
 namespace voskobovich\base\helpers;
 
+use yii\helpers\Html;
+
 
 /**
  * Class Html
  * @package voskobovich\base\helpers
  */
-class Html extends \yii\helpers\Html
+class SimpleHtml extends Html
 {
     /**
      * @param $name
