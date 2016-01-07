@@ -28,12 +28,9 @@
   },
   "autoload": {
     "psr-4": {
-      "voskobovich\\base\\": "",
-      "voskobovich\\base\\db\\": "db",
-      "voskobovich\\base\\db\\mysql\\": "db/mysql",
-      "voskobovich\\base\\db\\pgsql\\": "db/pgsql",
-      "voskobovich\\base\\helpers\\": "helpers",
-      "voskobovich\\base\\traits\\": "traits"
+      "voskobovich\\base\\db\\": "src/db",
+      "voskobovich\\base\\helpers\\": "src/helpers",
+      "voskobovich\\base\\traits\\": "src/traits"
     }
   }
 }
