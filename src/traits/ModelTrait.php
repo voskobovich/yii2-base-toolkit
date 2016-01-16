@@ -2,6 +2,7 @@
 
 namespace voskobovich\base\traits;
 
+use ReflectionClass;
 use yii\base\Model;
 
 
@@ -18,6 +19,13 @@ trait ModelTrait
     public function formId()
     {
         /** @var Model $this */
-        return mb_strtolower($this->formName()) . '-form';
+        $name = $this->formName();
+
+        if (empty($name)) {
+            $reflector = new ReflectionClass($this);
+            $name = $reflector->getShortName();
+        }
+
+        return mb_strtolower($name) . '-form';
     }
 }
