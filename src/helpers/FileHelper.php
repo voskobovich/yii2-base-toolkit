@@ -2,6 +2,8 @@
 
 namespace voskobovich\base\helpers;
 
+use yii\base\Exception;
+
 
 /**
  * Class FileHelper
@@ -35,16 +37,17 @@ class FileHelper extends \yii\helpers\FileHelper
      * @param string $path
      * @param string $name
      * @param string $extension
-     * @return bool|array
+     * @return array|bool
+     * @throws Exception
      */
     public static function saveFromUrl($url, $path, $name = null, $extension = 'png')
     {
+        if (!FileHelper::createDirectory($path)) {
+            throw new Exception("Directory not created \"$path\".");
+        }
+
         $file = file_get_contents(urldecode($url));
         $extension = trim($extension, " \t\n\r\0\x0B.");
-
-        if (FileHelper::createDirectory($path)) {
-            return false;
-        }
 
         if ($name == null) {
             $name = FileHelper::generateRandomName($path, $extension);
