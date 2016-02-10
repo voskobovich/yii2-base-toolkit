@@ -3,14 +3,13 @@
 namespace voskobovich\base\helpers;
 
 use Yii;
-use yii\base\Object;
 
 
 /**
  * Class Param
  * @package voskobovich\base\helpers
  */
-class Param extends Object
+class Param
 {
     /**
      * Геттер параметров приложения
