@@ -35,6 +35,15 @@ class Flash
 
     /**
      * @param $key
+     * @return mixed
+     */
+    public static function has($key)
+    {
+        return Yii::$app->session->hasFlash($key);
+    }
+
+    /**
+     * @param $key
      * @param null $defaultValue
      * @param bool $delete
      * @return mixed
