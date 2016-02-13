@@ -19,7 +19,7 @@ class Flash
      */
     public static function add($key, $value = true, $removeAfterAccess = true)
     {
-        return Yii::$app->session->addFlash($key, $value, $removeAfterAccess);
+        Yii::$app->session->addFlash($key, $value, $removeAfterAccess);
     }
 
     /**
@@ -30,7 +30,7 @@ class Flash
      */
     public static function set($key, $value = true, $removeAfterAccess = true)
     {
-        return Yii::$app->session->setFlash($key, $value, $removeAfterAccess);
+        Yii::$app->session->setFlash($key, $value, $removeAfterAccess);
     }
 
     /**
@@ -40,6 +40,16 @@ class Flash
     public static function has($key)
     {
         return Yii::$app->session->hasFlash($key);
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return mixed
+     */
+    public static function hasAndEqual($key, $value)
+    {
+        return Yii::$app->session->hasFlash($key) && Yii::$app->session->getFlash($key) == $value;
     }
 
     /**
