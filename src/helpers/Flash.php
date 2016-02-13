@@ -47,7 +47,7 @@ class Flash
      * @param $value
      * @return mixed
      */
-    public static function hasAndEqual($key, $value)
+    public static function hasEqual($key, $value)
     {
         return Yii::$app->session->hasFlash($key) && Yii::$app->session->getFlash($key) == $value;
     }
