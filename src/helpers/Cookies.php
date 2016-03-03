@@ -22,7 +22,7 @@ class Cookies
             $cookie = new Cookie($cookie);
         }
 
-        Yii::$app->response->cookies->add($cookie);
+        Yii::$app->request->cookies->add($cookie);
     }
 
     /**
@@ -33,7 +33,7 @@ class Cookies
      */
     public static function has($name)
     {
-        return Yii::$app->response->cookies->has($name);
+        return Yii::$app->request->cookies->has($name);
     }
 
     /**
@@ -43,7 +43,7 @@ class Cookies
      */
     public static function get($name)
     {
-        return Yii::$app->response->cookies->get($name);
+        return Yii::$app->request->cookies->get($name);
     }
 
     /**
@@ -54,7 +54,7 @@ class Cookies
      */
     public static function getValue($name, $defaultValue = null)
     {
-        return Yii::$app->response->cookies->getValue($name, $defaultValue);
+        return Yii::$app->request->cookies->getValue($name, $defaultValue);
     }
 
     /**
@@ -63,7 +63,7 @@ class Cookies
      */
     public static function count()
     {
-        return Yii::$app->response->cookies->getCount();
+        return Yii::$app->request->cookies->getCount();
     }
 
     /**
@@ -73,7 +73,7 @@ class Cookies
      */
     public static function remove($name, $removeFromBrowser = true)
     {
-        Yii::$app->response->cookies->remove($name, $removeFromBrowser);
+        Yii::$app->request->cookies->remove($name, $removeFromBrowser);
     }
 
     /**
@@ -81,7 +81,7 @@ class Cookies
      */
     public static function removeAll()
     {
-        Yii::$app->response->cookies->removeAll();
+        Yii::$app->request->cookies->removeAll();
     }
 
     /**
@@ -90,7 +90,7 @@ class Cookies
      */
     public static function toArray()
     {
-        return Yii::$app->response->cookies->toArray();
+        return Yii::$app->request->cookies->toArray();
     }
 
     /**
@@ -99,6 +99,6 @@ class Cookies
      */
     public static function fromArray(array $value)
     {
-        Yii::$app->response->cookies->fromArray($value);
+        Yii::$app->request->cookies->fromArray($value);
     }
 }
