@@ -33,7 +33,7 @@ class Cookies
      */
     public static function has($name)
     {
-        return Yii::$app->request->cookies->has($name);
+        return Yii::$app->request->cookies->has($name) || Yii::$app->response->cookies->has($name);
     }
 
     /**
