@@ -22,7 +22,7 @@ class Cookies
             $cookie = new Cookie($cookie);
         }
 
-        Yii::$app->request->cookies->add($cookie);
+        Yii::$app->response->cookies->add($cookie);
     }
 
     /**
