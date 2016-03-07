@@ -53,7 +53,7 @@ class FormWrapper extends Widget
     }
 
     /**
-     * @return ActiveRecord
+     * @return ActiveRecord|ModelInterface
      */
     public function getModel()
     {
