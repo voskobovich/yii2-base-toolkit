@@ -3,7 +3,8 @@
 namespace voskobovich\base\widgets;
 
 use InvalidArgumentException;
-use voskobovich\base\db\ActiveRecord;
+use voskobovich\base\interfaces\ModelInterface;
+use yii\db\ActiveRecord;
 use yii\base\Widget;
 
 
@@ -28,7 +29,7 @@ class FormWrapper extends Widget
     public $initAttributes;
 
     /**
-     * @var ActiveRecord
+     * @var ActiveRecord|ModelInterface
      */
     private $_model;
 
