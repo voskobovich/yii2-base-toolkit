@@ -31,7 +31,8 @@
       "voskobovich\\base\\db\\": "src/db",
       "voskobovich\\base\\helpers\\": "src/helpers",
       "voskobovich\\base\\traits\\": "src/traits",
-      "voskobovich\\base\\widgets\\": "src/widgets"
+      "voskobovich\\base\\widgets\\": "src/widgets",
+      "voskobovich\\base\\interfaces\\": "src/interfaces"
     }
   }
 }

@@ -2,6 +2,7 @@
 
 namespace voskobovich\base\db;
 
+use voskobovich\base\interfaces\ModelInterface;
 use voskobovich\base\traits\ModelTrait;
 use Yii;
 use yii\base\ErrorException;
@@ -11,10 +12,8 @@ use yii\helpers\ArrayHelper;
 /**
  * Class ActiveRecord
  * @package voskobovich\base\db
- *
- * @property integer id
  */
-abstract class ActiveRecord extends \yii\db\ActiveRecord
+abstract class ActiveRecord extends \yii\db\ActiveRecord implements ModelInterface
 {
     use ModelTrait;
 

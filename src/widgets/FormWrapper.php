@@ -41,8 +41,8 @@ class FormWrapper extends Widget
             throw new InvalidArgumentException('Param "modelClass" must be non-empty');
         }
 
-        if (!is_subclass_of($this->modelClass, ActiveRecord::className())) {
-            throw new InvalidArgumentException('Param "modelClass" must be extend "' . ActiveRecord::className() . '"');
+        if (!is_subclass_of($this->modelClass, 'voskobovich\base\interfaces\ModelInterface')) {
+            throw new InvalidArgumentException('Param "modelClass" must be extend "voskobovich\base\interfaces\ModelInterface"');
         }
 
         $this->_model = new $this->modelClass;
