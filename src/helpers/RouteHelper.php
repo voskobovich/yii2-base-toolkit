@@ -48,19 +48,7 @@ class RouteHelper
      */
     public static function isActive($route)
     {
-        if (is_array($route)) {
-            if (empty($route[1])) {
-                return false;
-            }
-
-            if (empty($route[0])) {
-                $route[0] = 'and';
-            }
-
-            if (!is_array($route[1])) {
-                $route[1] = (array)$route[1];
-            }
-
+        if (!empty($route[0])) {
             $result = true;
 
             foreach ($route[1] as $route) {
