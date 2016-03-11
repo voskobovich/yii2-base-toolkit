@@ -3,7 +3,6 @@
 namespace voskobovich\base\helpers;
 
 use Yii;
-use yii\base\InvalidParamException;
 
 
 /**
@@ -43,31 +42,19 @@ class RouteHelper
 
     /**
      * Проверка роута на активность
-     * @param $route
+     * @param array $route
      * @return mixed
      */
     public static function isActive($route)
     {
-        if (!empty($route[0])) {
-            $result = true;
-
-            foreach ($route[1] as $route) {
-                switch ($route[0]) {
-                    case 'and':
-                        $result = $result && self::isItemActive(['url' => $route]);
-                        break;
-                    case 'or':
-                        $result = false;
-                        if (self::isItemActive(['url' => $route])) {
-                            return true;
-                        }
-                        break;
-                    default:
-                        throw new InvalidParamException('Operation \'' . $route[0] . '\' not supported.');
+        if (is_array($route[0])) {
+            foreach ($route as $item) {
+                if (self::isItemActive(['url' => $item])) {
+                    return true;
                 }
             }
 
-            return $result;
+            return false;
         }
 
         return self::isItemActive(['url' => $route]);
