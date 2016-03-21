@@ -4,6 +4,7 @@ namespace voskobovich\base\widgets;
 
 use InvalidArgumentException;
 use voskobovich\base\interfaces\ModelInterface;
+use Yii;
 use yii\db\ActiveRecord;
 use yii\base\Widget;
 
@@ -46,7 +47,7 @@ class FormWrapper extends Widget
             throw new InvalidArgumentException('Param "modelClass" must be extend "voskobovich\base\interfaces\ModelInterface"');
         }
 
-        $this->_model = new $this->modelClass;
+        $this->_model = Yii::createObject($this->modelClass);
         $this->_model->setAttributes($this->initAttributes);
 
         parent::init();
