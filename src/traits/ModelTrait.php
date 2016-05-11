@@ -15,9 +15,10 @@ trait ModelTrait
 {
     /**
      * Returns the form lowercase name that this model class should use.
+     * @param null $end
      * @return string
      */
-    public function formId()
+    public function formId($end = null)
     {
         /** @var Model $this */
         $name = $this->formName();
@@ -27,7 +28,13 @@ trait ModelTrait
             $name = $reflector->getShortName();
         }
 
-        return mb_strtolower($name) . '-form';
+        $result = mb_strtolower($name) . '-form';
+
+        if (!empty($end)) {
+            $result .= '-' . $end;
+        }
+
+        return $result;
     }
 
     /**
