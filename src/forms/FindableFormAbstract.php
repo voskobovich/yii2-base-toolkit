@@ -8,7 +8,6 @@ use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\db\ActiveRecord;
-use yii\db\ActiveRecordInterface;
 
 
 /**
@@ -100,11 +99,11 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     }
 
     /**
-     * @param ActiveRecord $value
+     * @param ActiveRecord $source
      */
-    public function setSource(ActiveRecordInterface $value)
+    public function setSource($source)
     {
-        $this->_source = $value;
+        $this->_source = $source;
         $this->_source->scenario = $this->sourceScenario;
 
         $this->populateAttributes();
