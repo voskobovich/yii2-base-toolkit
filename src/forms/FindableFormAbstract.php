@@ -9,14 +9,11 @@ use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\db\ActiveRecord;
 
-
 /**
- * Class FindableFormAbstract
- * @package voskobovich\base\forms
+ * Class FindableFormAbstract.
  *
  * @property string $sourceScenario
  * @property string $defaultAttribute
- *
  * @property ActiveRecord $_source
  * @property ActiveRecord $source
  */
@@ -25,19 +22,22 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     use ModelTrait;
 
     /**
-     * Editable model class name
+     * Editable model class name.
+     *
      * @var string
      */
     public static $sourceClass;
 
     /**
-     * Default scenario for editable model
+     * Default scenario for editable model.
+     *
      * @var string
      */
     public $sourceScenario = ActiveRecord::SCENARIO_DEFAULT;
 
     /**
-     * Default attribute for print error
+     * Default attribute for print error.
+     *
      * @var string
      */
     public $defaultAttribute;
@@ -48,7 +48,8 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     private $_source;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
      * @throws InvalidConfigException
      */
     public function init()
@@ -75,7 +76,7 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     }
 
     /**
-     * Populate attributes value of source model
+     * Populate attributes value of source model.
      */
     public function populateSourceAttributes()
     {
@@ -87,7 +88,7 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     }
 
     /**
-     * Populate attributes value
+     * Populate attributes value.
      */
     public function populateAttributes()
     {
@@ -119,6 +120,7 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
 
     /**
      * @param $id
+     *
      * @return null|ActiveRecord
      */
     public static function findOne($id)
@@ -129,7 +131,7 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
         $source = static::$sourceClass;
         $source = $source::findOne($id);
 
-        if ($source == null) {
+        if (null === $source) {
             return null;
         }
 
@@ -141,6 +143,7 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     /**
      * @param null $attributeNames
      * @param bool $clearErrors
+     *
      * @return bool
      */
     public function validate($attributeNames = null, $clearErrors = true)
@@ -154,6 +157,7 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
                 if ($this->defaultAttribute && $source->hasErrors()) {
                     $this->populateErrors($source, $this->defaultAttribute);
                 }
+
                 return false;
             }
 
@@ -166,12 +170,14 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     /**
      * @param bool $runValidation
      * @param null $attributeNames
+     *
      * @return bool
      */
     public function save($runValidation = true, $attributeNames = null)
     {
         if ($runValidation && !$this->validate($attributeNames)) {
             Yii::info('Model not saved due to validation error.', __METHOD__);
+
             return false;
         }
 
@@ -184,6 +190,7 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
             if ($this->defaultAttribute && $source->hasErrors()) {
                 $this->populateErrors($source, $this->defaultAttribute);
             }
+
             return false;
         }
 

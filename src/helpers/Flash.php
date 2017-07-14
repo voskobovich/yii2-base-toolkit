@@ -4,10 +4,8 @@ namespace voskobovich\base\helpers;
 
 use Yii;
 
-
 /**
- * Class Flash
- * @package voskobovich\base\helpers
+ * Class Flash.
  */
 class Flash
 {
@@ -15,9 +13,8 @@ class Flash
      * @param $key
      * @param bool $value
      * @param bool $removeAfterAccess
-     * @return mixed
      */
-    public static function add($key, $value = true, $removeAfterAccess = true)
+    public static function add($key, $value = true, $removeAfterAccess = true): void
     {
         Yii::$app->session->addFlash($key, $value, $removeAfterAccess);
     }
@@ -26,18 +23,18 @@ class Flash
      * @param $key
      * @param bool $value
      * @param bool $removeAfterAccess
-     * @return mixed
      */
-    public static function set($key, $value = true, $removeAfterAccess = true)
+    public static function set($key, $value = true, $removeAfterAccess = true): void
     {
         Yii::$app->session->setFlash($key, $value, $removeAfterAccess);
     }
 
     /**
      * @param $key
-     * @return mixed
+     *
+     * @return bool
      */
-    public static function has($key)
+    public static function has($key): bool
     {
         return Yii::$app->session->hasFlash($key);
     }
@@ -45,17 +42,19 @@ class Flash
     /**
      * @param $key
      * @param $value
-     * @return mixed
+     *
+     * @return bool
      */
-    public static function hasEqual($key, $value)
+    public static function hasEqual($key, $value): bool
     {
-        return Yii::$app->session->hasFlash($key) && Yii::$app->session->getFlash($key) == $value;
+        return Yii::$app->session->hasFlash($key) && Yii::$app->session->getFlash($key) === $value;
     }
 
     /**
      * @param $key
      * @param null $defaultValue
      * @param bool $delete
+     *
      * @return mixed
      */
     public static function get($key, $defaultValue = null, $delete = false)

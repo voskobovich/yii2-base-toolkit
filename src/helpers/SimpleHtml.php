@@ -4,21 +4,21 @@ namespace voskobovich\base\helpers;
 
 use yii\helpers\Html;
 
-
 /**
- * Class Html
- * @package voskobovich\base\helpers
+ * Class Html.
  */
 class SimpleHtml extends Html
 {
     /**
      * @param $name
+     *
      * @return string
      */
-    public function getIdByName($name)
+    public function getIdByName($name): string
     {
         $id = str_replace(['[', ']'], ['_', ''], $name);
         $id = strtolower($id);
+
         return $id;
     }
 
@@ -27,20 +27,21 @@ class SimpleHtml extends Html
      * @param null $selection
      * @param array $items
      * @param array $options
+     *
      * @return string
      */
-    public static function radioList($name, $selection = null, $items = [], $options = [])
+    public static function radioList($name, $selection = null, $items = [], $options = []): string
     {
         $encode = !isset($options['encode']) || $options['encode'];
-        $formatter = isset($options['item']) ? $options['item'] : null;
-        $itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : [];
+        $formatter = $options['item'] ?? null;
+        $itemOptions = $options['itemOptions'] ?? [];
         $id = !empty($itemOptions['id']) ? $itemOptions['id'] : static::getIdByName($name);
         unset($itemOptions['id']);
         $lines = [];
         $index = 0;
         foreach ($items as $value => $label) {
             $checked = $selection !== null &&
-                (!is_array($selection) && !strcmp($value, $selection)
+                (false === is_array($selection) && !strcmp($value, $selection)
                     || is_array($selection) && in_array($value, $selection));
             if ($formatter !== null) {
                 $lines[] = call_user_func($formatter, $index, $label, $name, $checked, $value);
@@ -48,20 +49,21 @@ class SimpleHtml extends Html
                 $lines[] = static::radio($name, $checked, array_merge($itemOptions, [
                     'value' => $value,
                     'label' => $encode ? static::encode($label) : $label,
-                    'id' => $id . $index
+                    'id' => $id . $index,
                 ]));
             }
-            $index++;
+            ++$index;
         }
-        $separator = isset($options['separator']) ? $options['separator'] : "\n";
+        $separator = $options['separator'] ?? "\n";
         if (isset($options['unselect'])) {
             // add a hidden field so that if the list box has no option being selected, it still submits a value
             $hidden = static::hiddenInput($name, $options['unselect']);
         } else {
             $hidden = '';
         }
-        $tag = isset($options['tag']) ? $options['tag'] : 'div';
+        $tag = $options['tag'] ?? 'div';
         unset($options['tag'], $options['unselect'], $options['encode'], $options['separator'], $options['item'], $options['itemOptions']);
+
         return $hidden . static::tag($tag, implode($separator, $lines), $options);
     }
 
@@ -69,9 +71,10 @@ class SimpleHtml extends Html
      * @param string $name
      * @param bool $checked
      * @param array $options
+     *
      * @return string
      */
-    public static function radio($name, $checked = false, $options = [])
+    public static function radio($name, $checked = false, $options = []): string
     {
         $options['checked'] = (bool)$checked;
         $value = array_key_exists('value', $options) ? $options['value'] : '1';
@@ -82,17 +85,19 @@ class SimpleHtml extends Html
         } else {
             $hidden = '';
         }
+
         if (isset($options['label'])) {
             $label = $options['label'];
-            $labelOptions = isset($options['labelOptions']) ? $options['labelOptions'] : [];
-            $for = isset($options['id']) ? $options['id'] : '';
+            $labelOptions = $options['labelOptions'] ?? [];
+            $for = $options['id'] ?? '';
             unset($options['label'], $options['labelOptions']);
-            $content = static::input('radio', $name, $value, $options);;
+            $content = static::input('radio', $name, $value, $options);
             $content .= static::label($label, $for, $labelOptions);
+
             return $hidden . $content;
-        } else {
-            return $hidden . static::input('radio', $name, $value, $options);
         }
+
+        return $hidden . static::input('radio', $name, $value, $options);
     }
 
     /**
@@ -100,16 +105,17 @@ class SimpleHtml extends Html
      * @param null $selection
      * @param array $items
      * @param array $options
+     *
      * @return string
      */
-    public static function checkboxList($name, $selection = null, $items = [], $options = [])
+    public static function checkboxList($name, $selection = null, $items = [], $options = []): string
     {
         if (substr($name, -2) !== '[]') {
             $name .= '[]';
         }
         $encode = !isset($options['encode']) || $options['encode'];
-        $formatter = isset($options['item']) ? $options['item'] : null;
-        $itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : [];
+        $formatter = $options['item'] ?? null;
+        $itemOptions = $options['itemOptions'] ?? [];
         $id = !empty($itemOptions['id']) ? $itemOptions['id'] : static::getIdByName($name);
         unset($itemOptions['id']);
         $lines = [];
@@ -124,10 +130,10 @@ class SimpleHtml extends Html
                 $lines[] = static::checkbox($name, $checked, array_merge($itemOptions, [
                     'value' => $value,
                     'label' => $encode ? static::encode($label) : $label,
-                    'id' => $id . $index
+                    'id' => $id . $index,
                 ]));
             }
-            $index++;
+            ++$index;
         }
         if (isset($options['unselect'])) {
             // add a hidden field so that if the list box has no option being selected, it still submits a value
@@ -136,9 +142,10 @@ class SimpleHtml extends Html
         } else {
             $hidden = '';
         }
-        $separator = isset($options['separator']) ? $options['separator'] : "\n";
-        $tag = isset($options['tag']) ? $options['tag'] : 'div';
+        $separator = $options['separator'] ?? "\n";
+        $tag = $options['tag'] ?? 'div';
         unset($options['tag'], $options['unselect'], $options['encode'], $options['separator'], $options['item'], $options['itemOptions']);
+
         return $hidden . static::tag($tag, implode($separator, $lines), $options);
     }
 
@@ -146,9 +153,10 @@ class SimpleHtml extends Html
      * @param string $name
      * @param bool $checked
      * @param array $options
+     *
      * @return string
      */
-    public static function checkbox($name, $checked = false, $options = [])
+    public static function checkbox($name, $checked = false, $options = []): string
     {
         $options['checked'] = (bool)$checked;
         $value = array_key_exists('value', $options) ? $options['value'] : '1';
@@ -159,16 +167,18 @@ class SimpleHtml extends Html
         } else {
             $hidden = '';
         }
+
         if (isset($options['label'])) {
             $label = $options['label'];
-            $labelOptions = isset($options['labelOptions']) ? $options['labelOptions'] : [];
-            $for = isset($options['id']) ? $options['id'] : '';
+            $labelOptions = $options['labelOptions'] ?? [];
+            $for = $options['id'] ?? '';
             unset($options['label'], $options['labelOptions']);
             $content = static::input('checkbox', $name, $value, $options);
             $content .= static::label($label, $for, $labelOptions);
+
             return $hidden . $content;
-        } else {
-            return $hidden . static::input('checkbox', $name, $value, $options);
         }
+
+        return $hidden . static::input('checkbox', $name, $value, $options);
     }
 }

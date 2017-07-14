@@ -8,74 +8,138 @@ use Yii;
 use yii\base\ErrorException;
 use yii\helpers\ArrayHelper;
 
-
 /**
- * Class ActiveRecord
- * @package voskobovich\base\db
+ * Class ActiveRecord.
  */
 abstract class ActiveRecord extends \yii\db\ActiveRecord implements ModelInterface
 {
     use ModelTrait;
 
     /**
-     * Scenarios
+     * Scenarios.
      */
     const SCENARIO_INSERT = 'insert';
     const SCENARIO_UPDATE = 'update';
     const SCENARIO_DELETE = 'delete';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
      * @return ActiveQuery
      */
-    public static function find()
+    public static function find(): ActiveQuery
     {
         return new ActiveQuery(get_called_class());
     }
 
     /**
-     * Array for DropDownList
+     * Main primary key of model for sorting, selecting and more.
      *
-     * @param string $keyField
-     * @param string $valueField
-     * @param bool $asArray
-     * @return array
-     */
-    public static function listAll($keyField = 'id', $valueField = 'name', $asArray = true)
-    {
-        $query = static::find();
-        if ($asArray) {
-            $query->select([$keyField, $valueField])->asArray();
-        }
-
-        return ArrayHelper::map($query->all(), $keyField, $valueField);
-    }
-
-    /**
-     * Main primary key of model for sorting, selecting and more
-     * @return string
      * @throws ErrorException
+     *
+     * @return string
      */
-    public function getMainPk()
+    public function getMainPk(): string
     {
-        $pkName = $this->primaryKey();
+        $pkName = static::primaryKey();
         if (is_array($pkName)) {
             if (count($pkName) > 1) {
                 throw new ErrorException('Composite foreign keys are not allowed.');
             }
             $pkName = $pkName[0];
         }
+
         return (string)$pkName;
     }
 
     /**
-     * Formatted date create record
+     * Relation class name map.
+     *
+     * @return array
+     */
+    public function relationsClassMap(): array
+    {
+        return [];
+    }
+
+    /**
+     * Get actual class name of relation.
+     *
+     * @param $className
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return string
+     */
+    public function buildRelationClass($className): string
+    {
+        $relationsClassMap = $this->relationsClassMap();
+
+        if (false === empty($relationsClassMap[$className])) {
+            return $relationsClassMap[$className];
+        }
+
+        $classShortName = substr(strrchr($className, '\\'), 1);
+
+        if (empty($classShortName)) {
+            throw new \InvalidArgumentException('Invalid class name "' . $className . '"');
+        }
+
+        return str_replace(strrchr(static::class, '\\'), '', static::class) . '\\' . $classShortName;
+    }
+
+    /**
+     * Query for building list for DropDown.
+     *
+     * @param string $keyField
+     * @param string $valueField
+     * @param bool $asArray
+     *
+     * @return ActiveQuery
+     */
+    public static function listAllQueryBuilder($keyField = 'id', $valueField = 'name', $asArray = false): ActiveQuery
+    {
+        $query = static::find();
+
+        if ($asArray) {
+            $query->select([$keyField, $valueField])->asArray();
+        }
+
+        return $query;
+    }
+
+    /**
+     * Array for DropDownList.
+     *
+     * @param string $keyField
+     * @param string $valueField
+     * @param bool $asArray
+     *
+     * @return array
+     */
+    public static function listAll($keyField = 'id', $valueField = 'name', $asArray = false): array
+    {
+        $query = static::listAllQueryBuilder($keyField, $valueField, $asArray);
+
+        return ArrayHelper::map(
+            $query->all(),
+            $keyField,
+            $valueField
+        );
+    }
+
+    /**
+     * Formatted date create record.
+     *
      * @param string $format
      * @param string $emptyLabel
-     * @return string
+     *
+     * @throws \yii\base\InvalidParamException
      * @throws \yii\base\InvalidConfigException
+     *
+     * @return string
      */
-    public function getCreated($format = 'long', $emptyLabel = '-')
+    public function getCreated($format = 'long', $emptyLabel = '-'): string
     {
         if (empty($this->created_at)) {
             return $emptyLabel;
@@ -85,13 +149,17 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord implements ModelInterfa
     }
 
     /**
-     * Formatted date update record
+     * Formatted date update record.
+     *
      * @param string $format
      * @param string $emptyLabel
-     * @return string
+     *
+     * @throws \yii\base\InvalidParamException
      * @throws \yii\base\InvalidConfigException
+     *
+     * @return string
      */
-    public function getUpdated($format = 'long', $emptyLabel = '-')
+    public function getUpdated($format = 'long', $emptyLabel = '-'): string
     {
         if (empty($this->updated_at)) {
             return $emptyLabel;

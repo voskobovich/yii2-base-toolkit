@@ -5,18 +5,18 @@ namespace voskobovich\base\helpers;
 use Yii;
 use yii\web\Cookie;
 
-
 /**
- * Class Cookies
- * @package voskobovich\base\helpers
+ * Class Cookies.
  */
 class Cookies
 {
     /**
-     * Add cookie
+     * Add cookie.
+     *
      * @param array|Cookie $cookie
+     * @throws \yii\base\InvalidCallException
      */
-    public static function add($cookie)
+    public static function add($cookie): void
     {
         if (is_array($cookie)) {
             $cookie = new Cookie($cookie);
@@ -28,28 +28,34 @@ class Cookies
     /**
      * Returns whether there is a cookie with the specified name.
      * Note that if a cookie is marked for deletion from browser, this method will return false.
+     *
      * @param string $name
+     *
      * @return bool
      */
-    public static function has($name)
+    public static function has($name): bool
     {
         return Yii::$app->request->cookies->has($name);
     }
 
     /**
-     * Get cookie object
+     * Get cookie object.
+     *
      * @param string $name
+     *
      * @return Cookie
      */
-    public static function get($name)
+    public static function get($name): \yii\web\Cookie
     {
         return Yii::$app->request->cookies->get($name);
     }
 
     /**
-     * Get cookie value
+     * Get cookie value.
+     *
      * @param string $name
      * @param null $defaultValue
+     *
      * @return mixed
      */
     public static function getValue($name, $defaultValue = null)
@@ -58,46 +64,52 @@ class Cookies
     }
 
     /**
-     * Get count cookies
+     * Get count cookies.
+     *
      * @return int
      */
-    public static function count()
+    public static function count(): int
     {
         return Yii::$app->request->cookies->getCount();
     }
 
     /**
-     * Remove cookie by name
+     * Remove cookie by name.
+     *
      * @param string $name
      * @param bool $removeFromBrowser
+     * @throws \yii\base\InvalidCallException
      */
-    public static function remove($name, $removeFromBrowser = true)
+    public static function remove($name, $removeFromBrowser = true): void
     {
         Yii::$app->request->cookies->remove($name, $removeFromBrowser);
     }
 
     /**
-     * Remove all cookies
+     * Remove all cookies.
+     * @throws \yii\base\InvalidCallException
      */
-    public static function removeAll()
+    public static function removeAll(): void
     {
         Yii::$app->request->cookies->removeAll();
     }
 
     /**
-     * Get cookie as array
+     * Get cookie as array.
+     *
      * @return array
      */
-    public static function toArray()
+    public static function toArray(): array
     {
         return Yii::$app->request->cookies->toArray();
     }
 
     /**
-     * Set cookies from array
+     * Set cookies from array.
+     *
      * @param array $value
      */
-    public static function fromArray(array $value)
+    public static function fromArray(array $value): void
     {
         Yii::$app->request->cookies->fromArray($value);
     }

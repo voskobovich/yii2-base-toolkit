@@ -4,16 +4,15 @@ namespace voskobovich\base\helpers;
 
 use Yii;
 
-
 /**
- * Class RouteHelper
- * @package voskobovich\base\helpers
+ * Class RouteHelper.
  */
 class RouteHelper
 {
     /**
      * @var string the route used to determine if a menu item is active or not.
-     * If not set, it will use the route of the current request.
+     *             If not set, it will use the route of the current request.
+     *
      * @see params
      * @see isItemActive()
      */
@@ -21,16 +20,17 @@ class RouteHelper
 
     /**
      * @var array the parameters used to determine if a menu item is active or not.
-     * If not set, it will use `$_GET`.
+     *            If not set, it will use `$_GET`.
+     *
      * @see route
      * @see isItemActive()
      */
     public static $params;
 
     /**
-     * @return string|void
+     * @return void
      */
-    public static function init()
+    public static function init(): void
     {
         if (self::$route === null && Yii::$app->controller !== null) {
             self::$route = Yii::$app->controller->getRoute();
@@ -41,11 +41,14 @@ class RouteHelper
     }
 
     /**
-     * Проверка роута на активность
+     * Проверка роута на активность.
+     *
      * @param array $route
-     * @return mixed
+     *
+     * @return bool
+     * @throws \yii\base\InvalidParamException
      */
-    public static function isActive($route)
+    public static function isActive($route): bool
     {
         if (is_array($route[0])) {
             foreach ($route as $item) {
@@ -67,10 +70,13 @@ class RouteHelper
      * as the route for the item and the rest of the elements are the associated parameters.
      * Only when its route and parameters match [[route]] and [[params]], respectively, will a menu item
      * be considered active.
+     *
      * @param array $item the menu item to be checked
-     * @return boolean whether the menu item is active
+     *
+     * @return bool whether the menu item is active
+     * @throws \yii\base\InvalidParamException
      */
-    protected static function isItemActive($item)
+    protected static function isItemActive($item): bool
     {
         self::init();
 

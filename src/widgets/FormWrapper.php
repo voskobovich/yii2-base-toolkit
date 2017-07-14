@@ -8,23 +8,23 @@ use Yii;
 use yii\db\ActiveRecord;
 use yii\base\Widget;
 
-
 /**
- * Class FormWrapper
- * @package voskobovich\base\widgets
+ * Class FormWrapper.
  *
  * @property ActiveRecord $model
  */
 class FormWrapper extends Widget
 {
     /**
-     * Model class name
+     * Model class name.
+     *
      * @var string
      */
     public $modelClass;
 
     /**
-     * Init model attributes
+     * Init model attributes.
+     *
      * @var array
      */
     public $initAttributes;
@@ -35,7 +35,7 @@ class FormWrapper extends Widget
     private $_model;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function init()
     {

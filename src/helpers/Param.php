@@ -4,26 +4,25 @@ namespace voskobovich\base\helpers;
 
 use Yii;
 
-
 /**
- * Class Param
- * @package voskobovich\base\helpers
+ * Class Param.
  */
 class Param
 {
     /**
-     * Геттер параметров приложения
-     * @param $need
+     * @param $key
+     *
      * @return mixed
+     * @throws \InvalidArgumentException
      */
-    public static function get($need)
+    public static function get($key)
     {
         $params = Yii::$app->params;
 
-        if (!isset($params[$need])) {
-            HttpError::the500("Key not found: {$need}");
+        if (false === isset($params[$key])) {
+            throw new \InvalidArgumentException("Key not found: {$key}");
         }
 
-        return $params[$need];
+        return $params[$key];
     }
 }

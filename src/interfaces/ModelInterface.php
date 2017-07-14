@@ -4,15 +4,14 @@ namespace voskobovich\base\interfaces;
 
 use yii\db\ActiveRecord;
 
-
 /**
- * Interface ModelInterface
- * @package voskobovich\base\interfaces
+ * Interface ModelInterface.
  */
 interface ModelInterface
 {
     /**
      * Returns the form lowercase name that this model class should use.
+     *
      * @return string
      */
     public function formId();
