@@ -100,11 +100,11 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     }
 
     /**
-     * @param ActiveRecord $value
+     * @param ActiveRecord $source
      */
-    public function setSource(ActiveRecord $value)
+    public function setSource($source)
     {
-        $this->_source = $value;
+        $this->_source = $source;
         $this->_source->scenario = $this->sourceScenario;
 
         $this->populateAttributes();
