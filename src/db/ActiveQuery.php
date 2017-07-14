@@ -34,4 +34,18 @@ class ActiveQuery extends \yii\db\ActiveQuery
 
         return $this;
     }
+
+    /**
+     * Scope for archive level.
+     *
+     * @param int $archive_level_key
+     *
+     * @return $this
+     */
+    public function archiveLevel($archive_level_key)
+    {
+        $this->andWhere(['archive_level_key' => $archive_level_key]);
+
+        return $this;
+    }
 }

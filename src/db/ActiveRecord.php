@@ -97,7 +97,7 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord implements ModelInterfa
      *
      * @return ActiveQuery
      */
-    public static function listAllQueryBuilder($keyField = 'id', $valueField = 'name', $asArray = false): ActiveQuery
+    public static function listAllQueryBuilder($keyField, $valueField, $asArray): ActiveQuery
     {
         $query = static::find();
 
