@@ -6,12 +6,13 @@ use voskobovich\base\interfaces\ModelInterface;
 use voskobovich\base\traits\ModelTrait;
 use Yii;
 use yii\base\ErrorException;
+use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 
 /**
  * Class ActiveRecord.
  */
-abstract class ActiveRecord extends \yii\db\ActiveRecord implements ModelInterface
+class ActiveRecord extends \yii\db\ActiveRecord implements ModelInterface
 {
     use ModelTrait;
 
@@ -21,16 +22,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord implements ModelInterfa
     const SCENARIO_INSERT = 'insert';
     const SCENARIO_UPDATE = 'update';
     const SCENARIO_DELETE = 'delete';
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return ActiveQuery
-     */
-    public static function find(): ActiveQuery
-    {
-        return new ActiveQuery(get_called_class());
-    }
 
     /**
      * Main primary key of model for sorting, selecting and more.

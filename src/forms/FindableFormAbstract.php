@@ -78,7 +78,7 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     /**
      * Populate attributes value of source model.
      */
-    public function populateSourceAttributes()
+    public function populateSourceAttributes(): void
     {
         $attributes = array_intersect_key(
             $this->getAttributes(),
@@ -90,7 +90,7 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     /**
      * Populate attributes value.
      */
-    public function populateAttributes()
+    public function populateAttributes(): void
     {
         $attributes = array_intersect_key(
             $this->_source->getAttributes(),
@@ -102,7 +102,7 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     /**
      * @param ActiveRecord $source
      */
-    public function setSource($source)
+    public function setSource($source): void
     {
         $this->_source = $source;
         $this->_source->scenario = $this->sourceScenario;
@@ -113,7 +113,7 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     /**
      * @return ActiveRecord
      */
-    public function getSource()
+    public function getSource(): ActiveRecord
     {
         return $this->_source;
     }
@@ -121,9 +121,9 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     /**
      * @param $id
      *
-     * @return null|ActiveRecord
+     * @return null|FindableFormAbstract
      */
-    public static function findOne($id)
+    public static function findOne($id): ?FindableFormAbstract
     {
         $model = new static();
 
@@ -145,8 +145,9 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
      * @param bool $clearErrors
      *
      * @return bool
+     * @throws \yii\base\InvalidParamException
      */
-    public function validate($attributeNames = null, $clearErrors = true)
+    public function validate($attributeNames = null, $clearErrors = true): bool
     {
         if (parent::validate($attributeNames, $clearErrors)) {
             $this->populateSourceAttributes();
@@ -172,10 +173,11 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
      * @param null $attributeNames
      *
      * @return bool
+     * @throws \yii\base\InvalidParamException
      */
-    public function save($runValidation = true, $attributeNames = null)
+    public function save($runValidation = true, $attributeNames = null): bool
     {
-        if ($runValidation && !$this->validate($attributeNames)) {
+        if ($runValidation && false === $this->validate($attributeNames)) {
             Yii::info('Model not saved due to validation error.', __METHOD__);
 
             return false;
