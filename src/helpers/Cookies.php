@@ -14,6 +14,7 @@ class Cookies
      * Add cookie.
      *
      * @param array|Cookie $cookie
+     *
      * @throws \yii\base\InvalidCallException
      */
     public static function add($cookie): void
@@ -78,6 +79,7 @@ class Cookies
      *
      * @param string $name
      * @param bool $removeFromBrowser
+     *
      * @throws \yii\base\InvalidCallException
      */
     public static function remove($name, $removeFromBrowser = true): void
@@ -87,6 +89,7 @@ class Cookies
 
     /**
      * Remove all cookies.
+     *
      * @throws \yii\base\InvalidCallException
      */
     public static function removeAll(): void

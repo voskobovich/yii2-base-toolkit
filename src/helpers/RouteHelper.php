@@ -27,9 +27,6 @@ class RouteHelper
      */
     public static $params;
 
-    /**
-     * @return void
-     */
     public static function init(): void
     {
         if (self::$route === null && Yii::$app->controller !== null) {
@@ -45,8 +42,9 @@ class RouteHelper
      *
      * @param array $route
      *
-     * @return bool
      * @throws \yii\base\InvalidParamException
+     *
+     * @return bool
      */
     public static function isActive($route): bool
     {
@@ -73,8 +71,9 @@ class RouteHelper
      *
      * @param array $item the menu item to be checked
      *
-     * @return bool whether the menu item is active
      * @throws \yii\base\InvalidParamException
+     *
+     * @return bool whether the menu item is active
      */
     protected static function isItemActive($item): bool
     {

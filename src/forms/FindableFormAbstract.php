@@ -144,8 +144,9 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
      * @param null $attributeNames
      * @param bool $clearErrors
      *
-     * @return bool
      * @throws \yii\base\InvalidParamException
+     *
+     * @return bool
      */
     public function validate($attributeNames = null, $clearErrors = true): bool
     {
@@ -172,8 +173,9 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
      * @param bool $runValidation
      * @param null $attributeNames
      *
-     * @return bool
      * @throws \yii\base\InvalidParamException
+     *
+     * @return bool
      */
     public function save($runValidation = true, $attributeNames = null): bool
     {

@@ -12,8 +12,9 @@ class Param
     /**
      * @param $key
      *
-     * @return mixed
      * @throws \InvalidArgumentException
+     *
+     * @return mixed
      */
     public static function get($key)
     {
