@@ -68,11 +68,12 @@ abstract class FindableFormAbstract extends Model implements ModelInterface
     }
 
     /**
+     * @param bool $asArray
      * @return mixed
      */
-    public function getPrimaryKey()
+    public function getPrimaryKey($asArray = false)
     {
-        return $this->getSource()->getPrimaryKey();
+        return $this->getSource()->getPrimaryKey($asArray);
     }
 
     /**
